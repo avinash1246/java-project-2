@@ -1,0 +1,105 @@
+package view;
+
+import java.awt.EventQueue;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+
+import controller.EmployeeController;
+
+import javax.swing.JButton;
+import java.awt.Font;
+import java.awt.Toolkit;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.awt.event.ActionEvent;
+
+public class ApplySkillFrame {
+
+	private JFrame frame;
+	private JLabel lRecruited,lEmployeeId;
+	private JTextField textField,textField1,textField2;
+	JButton btnSubmit;
+	EmployeeController empcontroller;
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					new ApplySkillFrame();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+	
+	private void ApplyFrame() throws ClassNotFoundException, SQLException {
+		frame = new JFrame("Applying Job");
+		frame.getContentPane().setFont(new Font("Calibri", Font.PLAIN, 14));
+		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\PC\\Pictures\\Screenshots\\Dollar$.png"));
+		frame.setBounds(100, 100, 451, 344);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(null);
+		frame.setVisible(true); 
+		
+		lRecruited = new JLabel("Employee ID");
+		lRecruited.setFont(new Font("Calibri", Font.PLAIN, 14));
+		lRecruited.setBounds(59, 78, 112, 17);
+		frame.getContentPane().add(lRecruited);
+		
+		textField = new JTextField();
+		textField.setFont(new Font("Calibri", Font.PLAIN, 14));
+		textField.setBounds(203, 76, 152, 20);
+		frame.getContentPane().add(textField);
+		textField.setColumns(10);
+		
+		lEmployeeId = new JLabel("Skill ID");
+		lEmployeeId.setFont(new Font("Calibri", Font.PLAIN, 14));
+		lEmployeeId.setBounds(59, 127, 72, 17);
+		frame.getContentPane().add(lEmployeeId);
+		
+		JLabel lblJobId = new JLabel("Experience");
+		lblJobId.setFont(new Font("Calibri", Font.PLAIN, 14));
+		lblJobId.setBounds(59, 176, 72, 17);
+		frame.getContentPane().add(lblJobId);
+		
+		textField1 = new JTextField();
+		textField1.setFont(new Font("Calibri", Font.PLAIN, 14));
+		textField1.setColumns(10);
+		textField1.setBounds(203, 125, 152, 20);
+		frame.getContentPane().add(textField1);
+		
+		textField2 = new JTextField();
+		textField2.setFont(new Font("Calibri", Font.PLAIN, 14));
+		textField2.setColumns(10);
+		textField2.setBounds(203, 174, 152, 20);
+		frame.getContentPane().add(textField2);
+		
+		btnSubmit = new JButton("SUBMIT");
+		empcontroller = new EmployeeController();
+		btnSubmit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int EYR, EID, SID;
+				EYR= Integer.parseInt(textField.getText());
+				EID= Integer.parseInt(textField1.getText());
+				SID= Integer.parseInt(textField2.getText());
+				empcontroller.addEmpSkill(EYR,EID,SID);
+			}
+		});
+		btnSubmit.setFont(new Font("Calibri", Font.PLAIN, 14));
+		btnSubmit.setBounds(133, 234, 130, 23);
+		frame.getContentPane().add(btnSubmit);
+	}
+	/**
+	 * Create the application.
+	 * @throws SQLException 
+	 * @throws ClassNotFoundException 
+	 */
+	public ApplySkillFrame() throws ClassNotFoundException, SQLException {
+		ApplyFrame();
+	}
+
+}
